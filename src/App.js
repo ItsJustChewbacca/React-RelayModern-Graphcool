@@ -5,6 +5,13 @@ import {
   graphql
 } from 'react-relay'
 import environment from './Environment'
+const AppAllPostQuery = graphql`
+  query AppAllPostQuery {
+    viewer {
+      ...ListPage_viewer
+    }
+  }
+`
 class App extends Component {
   render() {
     return (
