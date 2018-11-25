@@ -58,7 +58,7 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
-    "relay": "relay-compiler --src ./src --schema ./schema.graphql",
+    "relay": "relay-compiler --src ./src --schema ./server/schema.graphql",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
