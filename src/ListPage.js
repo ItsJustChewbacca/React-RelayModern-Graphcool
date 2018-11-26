@@ -30,7 +30,7 @@ class ListPage extends React.Component {
         </Link>
         <div className='w-100' style={{ maxWidth: 400 }}>
           {this.props.viewer.allPosts.edges.map(({node}) =>
-            <Post key={node.__id} post={node} />
+            <Post key={node.__id} post={node} viewer={this.props.viewer} />
           )}
         </div>
       </div>
@@ -39,6 +39,7 @@ class ListPage extends React.Component {
 }
 export default createFragmentContainer(ListPage, graphql`
   fragment ListPage_viewer on Viewer {
+    ...Post_viewer
     allPosts(last: 100, orderBy: createdAt_DESC) @connection(key: "ListPage_allPosts", filters: []) {
       edges {
         node {
