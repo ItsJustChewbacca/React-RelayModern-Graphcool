@@ -1,4 +1,5 @@
 import React from 'react'
+import DeletePostMutation from './DeletePostMutation'
 import {
   createFragmentContainer,
   graphql
@@ -23,9 +24,13 @@ class Post extends React.Component {
     )
   }
   _handleDelete = () => {
+    DeletePostMutation(this.props.post.id, this.props.viewer.id)
   }
 }
 export default createFragmentContainer(Post, graphql`
+  fragment Post_viewer on Viewer {
+    id
+  }
   fragment Post_post on Post {
     id
     description
