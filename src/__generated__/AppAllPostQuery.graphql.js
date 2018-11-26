@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 0207fb1f0ce287386fb8c255be0c9f55
+ * @relayHash 032c621b3982c448f70740543809604a
  */
 
 /* eslint-disable */
@@ -32,6 +32,7 @@ query AppAllPostQuery {
 }
 
 fragment ListPage_viewer on Viewer {
+  ...Post_viewer
   allPosts(last: 100, orderBy: createdAt_DESC) {
     edges {
       node {
@@ -48,6 +49,10 @@ fragment ListPage_viewer on Viewer {
   }
 }
 
+fragment Post_viewer on Viewer {
+  id
+}
+
 fragment Post_post on Post {
   id
   description
@@ -56,7 +61,14 @@ fragment Post_post on Post {
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = [
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+},
+v1 = [
   {
     "kind": "Literal",
     "name": "last",
@@ -69,20 +81,13 @@ var v0 = [
     "value": "createdAt_DESC",
     "type": "PostOrderBy"
   }
-],
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "id",
-  "args": null,
-  "storageKey": null
-};
+];
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "AppAllPostQuery",
   "id": null,
-  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_post on Post {\n  id\n  description\n  imageUrl\n}\n",
+  "text": "query AppAllPostQuery {\n  viewer {\n    ...ListPage_viewer\n    id\n  }\n}\n\nfragment ListPage_viewer on Viewer {\n  ...Post_viewer\n  allPosts(last: 100, orderBy: createdAt_DESC) {\n    edges {\n      node {\n        ...Post_post\n        id\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      hasPreviousPage\n      startCursor\n    }\n  }\n}\n\nfragment Post_viewer on Viewer {\n  id\n}\n\nfragment Post_post on Post {\n  id\n  description\n  imageUrl\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -123,12 +128,13 @@ return {
         "concreteType": "Viewer",
         "plural": false,
         "selections": [
+          v0,
           {
             "kind": "LinkedField",
             "alias": null,
             "name": "allPosts",
             "storageKey": "allPosts(last:100,orderBy:\"createdAt_DESC\")",
-            "args": v0,
+            "args": v1,
             "concreteType": "PostConnection",
             "plural": false,
             "selections": [
@@ -150,7 +156,7 @@ return {
                     "concreteType": "Post",
                     "plural": false,
                     "selections": [
-                      v1,
+                      v0,
                       {
                         "kind": "ScalarField",
                         "alias": null,
@@ -214,12 +220,11 @@ return {
             "kind": "LinkedHandle",
             "alias": null,
             "name": "allPosts",
-            "args": v0,
+            "args": v1,
             "handle": "connection",
             "key": "ListPage_allPosts",
             "filters": []
-          },
-          v1
+          }
         ]
       }
     ]

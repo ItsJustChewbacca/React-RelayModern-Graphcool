@@ -9,6 +9,7 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 type Post_post$ref = any;
+type Post_viewer$ref = any;
 import type { FragmentReference } from "relay-runtime";
 declare export opaque type ListPage_viewer$ref: FragmentReference;
 export type ListPage_viewer = {|
@@ -19,6 +20,7 @@ export type ListPage_viewer = {|
       |}
     |}>
   |},
+  +$fragmentRefs: Post_viewer$ref,
   +$refType: ListPage_viewer$ref,
 |};
 */
@@ -42,6 +44,11 @@ const node/*: ConcreteFragment*/ = {
   },
   "argumentDefinitions": [],
   "selections": [
+    {
+      "kind": "FragmentSpread",
+      "name": "Post_viewer",
+      "args": null
+    },
     {
       "kind": "LinkedField",
       "alias": "allPosts",
@@ -122,5 +129,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'bc125fb7c9d8f2053d148730de87c57e';
+(node/*: any*/).hash = '09270d0796a50c019bd3e5f148cb1ac4';
 module.exports = node;
