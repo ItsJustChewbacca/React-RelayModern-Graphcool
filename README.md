@@ -1,6 +1,6 @@
-#Instagram Clone using Relay Modern and Graphcool
+# Instagram Clone using Relay Modern and Graphcool
 
-##Getting Started
+## Getting Started
 
 1. If necessary, install graphcool `npm install -g graphcool`
 2. Run `Npm Install`
